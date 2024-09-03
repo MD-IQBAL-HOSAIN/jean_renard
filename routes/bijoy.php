@@ -1,17 +1,38 @@
 <?php
 
-use App\Http\Controllers\Biography;
-use App\Http\Controllers\Contacts;
-use App\Http\Controllers\Discography;
-use App\Http\Controllers\HtmlloginController;
-use App\Http\Controllers\Media;
-use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\frontend\Biography;
+use App\Http\Controllers\frontend\ChangepasswordController;
+use App\Http\Controllers\frontend\CommunityController;
+use App\Http\Controllers\frontend\ContactsController;
+use App\Http\Controllers\frontend\CustomerSupportController;
+use App\Http\Controllers\frontend\DiscographyController;
+use App\Http\Controllers\frontend\FaqController;
+use App\Http\Controllers\frontend\ForgetpasswordController;
+use App\Http\Controllers\frontend\LoginController;
+use App\Http\Controllers\frontend\MediaController;
+use App\Http\Controllers\frontend\PrivacyController;
+use App\Http\Controllers\frontend\ShopController;
+use App\Http\Controllers\frontend\SignupController;
+use App\Http\Controllers\frontend\TemplateController;
+use App\Http\Controllers\frontend\TermsController;
 use Illuminate\Support\Facades\Route;
 
+//frontend routes starts.
 Route::get('/',[TemplateController::class,'index']);
 Route::get('/biography',[Biography::class,'index'])->name('biography');
-Route::get('/discography',[Discography::class,'index'])->name('discography');
-Route::get('/media',[Media::class,'index'])->name('media');
-Route::get('/shop',[Media::class,'index'])->name('shop');
-Route::get('/contacts',[Contacts::class,'index'])->name('contacts');
-Route::get('/logins',[HtmlloginController::class,'index'])->name('logins');
+Route::get('/discography',[DiscographyController::class,'index'])->name('discography');
+Route::get('/media',[MediaController::class,'index'])->name('media');
+Route::get('/shop',[ShopController::class,'index'])->name('shop');
+Route::get('/contacts',[ContactsController::class,'index'])->name('contacts');
+Route::get('/logins',[LoginController::class,'index'])->name('logins');
+Route::get('/registers',[SignupController::class,'index'])->name('registers');
+Route::get('/forgetpass',[ForgetpasswordController::class,'index'])->name('forgetpass');
+Route::get('/passchange',[ChangepasswordController::class,'index'])->name('passchange');
+Route::get('/Custo',[CustomerSupportController::class,'index'])->name('customersupport');
+Route::get('/privacy',[PrivacyController::class,'index'])->name('privacy');
+Route::get('/terms',[TermsController::class,'index'])->name('terms');
+Route::get('/community',[CommunityController::class,'index'])->name('community');
+Route::get('/faq',[FaqController::class,'index'])->name('faq');
+
+
+//frontend routes end.

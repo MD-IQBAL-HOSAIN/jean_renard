@@ -1,27 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('frontend.app', ['title' => 'Forget Password'])
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Forget password</title>
-  <!-- favicon link -->
-
-  <!-- All Css Links -->
-  <link rel="stylesheet" href="assets/css/plugins/aos.css" />
-  <link rel="stylesheet" href="assets/css/plugins/bootstrap-icons.min.css" />
-  <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/plugins/owl.carousel.min.css" />
-
-  <!-- Custom Css Links -->
-  <link rel="stylesheet" href="assets/css/helper.css" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="stylesheet" href="assets/css/responsive.css" />
-</head>
-
-<body>
-
-  <section class=" bi-login-container">
+@section('main')   
+<!-- main area starts --> 
+<section class=" bi-login-container">
     <div class="login-container-left">
       <div class="form-container">
         <h1>Forgot
@@ -30,7 +11,7 @@
           password. Just input that information in the fields below and click on the button. This will send you a new
           email that will link you to the password change website. </p>
         <hr />
-        <form action="success.html">
+        <form action="{{ route('passchange')}}">
           <div class="bi-login-input-wrapper">
             <input type="email" placeholder="Your Email" name="email" id="email" />
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -52,13 +33,8 @@
       </div>
     </div>
     <div class="login-container-right">
-      <img class="" src="assets/images/cuate.png" alt="" srcset="">
+      <img class="" src="frontend/assets/images/cuate.png"  alt="" srcset=""> 
     </div>
   </section>
-
-  <script src="assets/js/jquery-3.7.1.min.js"></script>
-  <script src="assets/js/plugins.js"></script>
-  <script src="assets/js/main.js"></script>
-</body>
-
-</html>
+  <!-- main area ends -->
+@endSection

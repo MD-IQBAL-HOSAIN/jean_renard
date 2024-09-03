@@ -23,7 +23,7 @@
                 <div class="bi-login-input-wrapper save">
                     <input type="checkbox" name="save" id="save" />
                     <label for="save"
-                      ><span>Remember Me</span><a href="forgetpassword.html" target="_blank"> Forget Your Password?</a>
+                      ><span>Remember Me</span><a href="{{ route('forgetpass')}}" target="_blank"> Forget Your Password?</a>
                     </label>
                   </div>
                   <div class="bi-login-input-wrapper ">
@@ -33,7 +33,7 @@
         </div>
         <div class="redirect-container">
             <p>Don't have an account yet?</p>
-            <a href="sign-up.html">Register Here</a>
+            <a href="{{ route('registers')}}">Register Here</a>
         </div>
     </div>
     <div class="login-container-right">

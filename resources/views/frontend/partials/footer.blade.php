@@ -5,10 +5,10 @@
         class="d-flex footer-container align-items-center justify-content-between gap-3">
         <p>Copyright 2024, All Rights Reserved.</p>
         <ul class="d-flex gap-3">
-          <li> <a href="privacy.html">Privacy Policy</a></li>
-          <li> <a href="terms.html">Terms & Condition</a></li>
-          <li> <a href="community.html">Community</a></li>
-          <li> <a href="faq.html">Faq</a></li>
+          <li> <a href="{{ route('privacy')}}">Privacy Policy</a></li>
+          <li> <a href="{{ route('terms')}}">Terms & Condition</a></li>
+          <li> <a href="{{ route('community')}}">Community</a></li>
+          <li> <a href="{{ route('faq')}}">Faq</a></li>
         </ul>
         <div class="icon-container">
           <div class="icon-box">

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\frontend;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class Contacts extends Controller
+class ContactsController extends Controller
 {
     public function index()
     {
         return view('frontend.contacts');
     }
 }
-
