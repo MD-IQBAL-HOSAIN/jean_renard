@@ -19,5 +19,6 @@ Route::middleware('auth')->group(function () {
 
 // require place 
 
-require __DIR__.'/bijoy.php';
+require __DIR__.'/frontend.php';
+require __DIR__.'/backend.php';
 require __DIR__.'/auth.php';

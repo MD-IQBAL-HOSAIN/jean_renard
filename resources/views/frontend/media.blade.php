@@ -5,7 +5,7 @@
     <main>
         <!-- banner section starts -->
         <section>
-            <div style="background-image: url('assets/images/sm--banner-01.jpg');" class="sm-banner">
+            <div style="background-image: url('frontend/assets/images/sm--banner-01.jpg');" class="sm-banner">
                 <div class="container">
                     <h1>
                         <span class="sm-banner-color-text">Explore<br> Jean Renard's<br> </span>
@@ -30,7 +30,7 @@
                     </p>
                 </div>
                 <div id="sm-discography-gallary-container" class="sm-gallary-grid-wrapper">
-                    <div style="background-image: linear-gradient(to bottom, #00000090 50%, #00000090 50%), url('assets/images/sm-gallary-01.jpg');"
+                    <div style="background-image: linear-gradient(to bottom, #00000090 50%, #00000090 50%), url('frontend/assets/images/sm-gallary-01.jpg');"
                         class="item1">
                         <div class="sm-gallary-text-container">
                             <h3>Grand Prix de la Chanson Française</h3>
@@ -38,14 +38,14 @@
                         </div>
                     </div>
                     <div class="item2">
-                        <img class="image2" src="assets/images/sm-gallary-02.jpg" alt="" />
+                        <img class="image2" src="frontend/assets/images/sm-gallary-02.jpg" alt="" />
                         <!-- <a href="assets/images/sm-gallary-02.jpg"></a> -->
                     </div>
                     <div class="item3">
-                        <img class=" " src="assets/images/sm-gallary-03.jpg" alt="" />
+                        <img class=" " src="frontend/assets/images/sm-gallary-03.jpg" alt="" />
                     </div>
                     <div class="item4">
-                        <img class=" " src="assets/images/sm-gallary-04.jpg" alt="" />
+                        <img class=" " src="frontend/assets/images/sm-gallary-04.jpg" alt="" />
                     </div>
                     <div class="item5">
                         <img class=" " src="assets/images/sm-gallary-05.jpg" alt="" />
@@ -303,7 +303,7 @@
                 <div id="recent-interviews-main-wrapper" class="sm-biography-recent-interviews-wrapper">
                     <div class="sm-item1">
                         <div class="recent-image-container">
-                            <img src="assets/images/sm-media-trending01.jpg" alt="">
+                            <img src="frontend/assets/images/sm-media-trending01.jpg" alt="">
                         </div>
                         <div class="top-date">
                             <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"
