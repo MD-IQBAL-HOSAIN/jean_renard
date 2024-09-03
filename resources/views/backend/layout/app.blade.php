@@ -52,6 +52,7 @@
             </div>
         </div>
     </div>
+    @include('backend.partials.script')
 
 </body>
 
