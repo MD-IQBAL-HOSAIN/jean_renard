@@ -10,6 +10,7 @@
 </head>
 
 <body>
+     <!-- start header  -->
     @include('frontend.partials.header')
     <!-- end header  -->
 

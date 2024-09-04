@@ -41,7 +41,14 @@
                             alt="" /></a>
                 </div>
                 <div class="d-flex gap-2 align-items-center">
-                    <a href="{{ route('logins') }}" class="login-btn login-btn-lg">Log In / Sign Up</a>
+                    @auth
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="login-btn login-btn-lg">Log Out</button>
+                        </form>
+                    @else
+                        <a href="{{ route('logins') }}" class="login-btn login-btn-lg">Log In / Sign Up</a>
+                    @endauth
                     <div class="hamburger-icon">
                         <svg onclick="showMenu()" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32"
                             height="100" viewBox="0 0 50 50">

@@ -12,31 +12,52 @@
                     <p class="signup-para signup-para-1">
                         We need you to help us with some basic information for your account creation. Here are our <a class="signup-terms" href="terms.html">terms and conditions</a>. Please read them carefully. We are GDRP compliiant
                     </p>
+
                     <div class="signup-input-field">
-                        <form action="success.html">
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
                             <div class="form-group">
-                               <input type="text" class="form-control" id="inputname" name="name" placeholder="Your Name">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="inputname" name="name" placeholder="Your Name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Your Email">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Your Email" value="{{ old('email') }}" required autocomplete="email">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="password" placeholder="Password" required>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password" required autocomplete="new-password">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            
                             <div class="form-group">
-                               <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="agreeTerms" required>
-                                <label class="form-check-label signup-para" for="agreeTerms">I agree with <a class="signup-terms" href="terms.html">terms and conditions</a> </label>
-                              </div>
-                              <div class="change-pwd-div">
-                                <a href="success.html"></a>
+                                <input type="checkbox" class="form-check-input @error('terms') is-invalid @enderror" id="agreeTerms" name="terms" required>
+                                <label class="form-check-label signup-para" for="agreeTerms">I agree with <a class="signup-terms" href="terms.html">terms and conditions</a></label>
+                                @error('terms')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="change-pwd-div">
                                 <button type="submit" class="sign-up-register">Register</button>
-                              </div>
+                            </div>
                         </form>
                     </div>
+
                     <div class="already-member d-flex align-items-center gap-4">
                         <p class="already-member-para">Already a member?</p>
                         <a href="login.html">
@@ -45,7 +66,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 signup-col-2">
-                    <img src="assets/images/signup-img-1.png" alt="" srcset="">
+                    <img src="frontend/assets/images/signup-img-1.png" alt="" srcset="">
                 </div>
             </div>
         </div>
