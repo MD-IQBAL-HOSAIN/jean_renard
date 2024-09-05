@@ -3,13 +3,13 @@
 @section('main')
 
     <div class="table-responsive">
-        <div class="d-flex justify-content-between align-items-center">
-            <h1>Posts</h1>
-            <a href="{{ route('backend.post.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i>
-                Create Post
-            </a>
+        <div class="justify-content-between align-items-center">
+            <h1 style="text-align: center">Posts</h1>
         </div>
+        <a href="{{ route('posts.create') }}" class="btn btn-primary mb-2">
+            <i class="fas fa-plus"></i>
+            Create Post
+        </a>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -25,16 +25,22 @@
                     <tr>
                         <td>{{ $post->user->name }} ({{ $post->user->email }})</td>
                         <td>{{ $post->title }}</td>
-                        <td>{{ $post->description }}</td>
-                        <td>{{ $post->image }}</td>
-                       {{--  <td>
-                            <a href="{{ route('backend.post.edit', $post->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                            <form action="{{ route('backend.post.destroy', $post->id) }}" method="post" class="d-inline">
+                        <td>{{ Str::limit($post->description) }}</td>
+                        <td>
+                            <img src="{{ $post->image ? asset('storage/' . $post->image) : '' }}" width="100" height="100" alt="">
+                        </td>
+                        <td>
+                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="{{ route('posts.destroy', $post->id) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </form>
-                        </td> --}}
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
