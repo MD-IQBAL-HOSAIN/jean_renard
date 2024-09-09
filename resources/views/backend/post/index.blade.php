@@ -2,7 +2,7 @@
 
 @section('main')
 
-    <div class="table-responsive">
+    <div class="container table-responsive">
         <div class="justify-content-between align-items-center">
             <h1 style="text-align: center">Posts</h1>
         </div>
