@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+//log in access with role.
 Route::get('/dashboard', function () {
     if (Auth::user()->role === 'admin') {
         return redirect()->intended(route('adminDashboard', absolute: false));
@@ -13,6 +14,7 @@ Route::get('/dashboard', function () {
     }
 })->middleware(['auth'])->name('dashboard');
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -20,7 +22,6 @@ Route::middleware('auth')->group(function () {
 });
 
 // require place 
-
 require __DIR__.'/frontend.php';
 require __DIR__.'/backend.php';
 require __DIR__.'/auth.php';

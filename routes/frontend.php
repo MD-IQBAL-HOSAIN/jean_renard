@@ -30,7 +30,10 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/shop',[ShopController::class,'index'])->name('shop');
     Route::get('/contacts',[ContactsController::class,'index'])->name('contacts');
     Route::get('/logins',[LoginController::class,'index'])->name('logins');
+
     Route::get('/registers',[SignupController::class,'index'])->name('registers');
+    Route::post('/register', [SignupController::class, 'register'])->name('register');
+    
     Route::get('/forgetpass',[ForgetpasswordController::class,'index'])->name('forgetpass');
     Route::get('/passchange',[ChangepasswordController::class,'index'])->name('passchange');
     Route::get('/Custo',[CustomerSupportController::class,'index'])->name('customersupport');

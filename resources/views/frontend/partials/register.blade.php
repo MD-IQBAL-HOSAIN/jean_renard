@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input @error('terms') is-invalid @enderror" id="agreeTerms" name="terms" required>
-                                <label class="form-check-label signup-para" for="agreeTerms">I agree with <a class="signup-terms" href="terms.html">terms and conditions</a></label>
+                                <label class="form-check-label signup-para" for="agreeTerms">I agree with <a class="signup-terms" href="{{ route('terms') }}">terms and conditions</a></label>
                                 @error('terms')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -55,7 +55,18 @@
                             <div class="change-pwd-div">
                                 <button type="submit" class="sign-up-register">Register</button>
                             </div>
+                            @if (session('success'))
+                                <div class="alert alert-success mt-4">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            @if (session('error'))
+                                <div class="alert alert-danger mt-4">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                         </form>
+                        
                     </div>
 
                     <div class="already-member d-flex align-items-center gap-4">
