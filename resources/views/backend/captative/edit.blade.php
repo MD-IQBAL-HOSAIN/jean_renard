@@ -1,7 +1,29 @@
 @extends('backend.layout.app', ['title' => 'Edit Captative Moment'])
 
+@push('style')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css">
+
+    <style>
+        .dropify-wrapper .dropify-preview .dropify-render img {
+            top: 50%;
+            left: 35%;
+            -webkit-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+            position: relative;
+            max-width: 100%;
+            max-height: 100%;
+            background-color: #FFF;
+            -webkit-transition: border-color 0.15s linear;
+            transition: border-color 0.15s linear;
+        }
+    </style>
+@endpush
+
 @section('main')
-<div class="container mt-3 card">
+<div class="container mt-3 card" style="width: 50vw;">
+    <div class="card-header">
+        <h4 class="card-title text-center">Edit Captative Moment</h4>
+    </div>
     <div class="card-body">
         <form action="{{ route('captivating.update', $captative->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -30,13 +52,23 @@
             </div>
             <div class="form-group">
                 <label for="image">Image</label>
-                <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
+                <input type="file" class="dropify form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
 
             </div>
-            <div class="text-right">
-                <button type="submit" class="btn btn-primary">Update</button>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Update</button>
             </div>
         </form>
     </div>
 </div>
 @endsection
+@push('script')
+    <!-- Dropify JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.dropify').dropify();
+        });
+    </script>
+@endpush

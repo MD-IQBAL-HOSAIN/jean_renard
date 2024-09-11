@@ -20,7 +20,7 @@
 @endpush
 
 @section('main')
-    <div class="container mt-4">
+    <div class="container mt-4"  style="width: 50vw;">
         <div class="card shadow-sm">
             <div class="card-header">
                 <h4 class="card-title text-center">Create Captative Moment</h4>
@@ -55,9 +55,8 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-
-                    <div class="text-end">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">Create</button>
                     </div>
                 </form>
             </div>
