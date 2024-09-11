@@ -32,6 +32,12 @@
             <i class="fas fa-fw fa-file-alt"></i>
             <span>Posts</span></a>
     </li>
+    {{-- Captative moment start --}}
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('captivating.index') }}">+
+            <i class="fas fa-fw fa-file-alt"></i>
+            <span>Captative moment</span></a>
+    </li>
 
 
     <!-- Divider -->

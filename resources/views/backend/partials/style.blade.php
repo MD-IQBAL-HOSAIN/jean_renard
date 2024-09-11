@@ -11,3 +11,10 @@
 
 {{-- icon cdn for bootstrap --}}
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+ {{-- tailwind --}}
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons@v3/simple-icons.css">
+
+ <!-- Dropify CSS -->
+    @stack('style')

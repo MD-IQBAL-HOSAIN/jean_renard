@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>{{ $title }}</title>
+
     @include('backend.partials.style')
 
 </head>
@@ -53,7 +54,6 @@
         </div>
     </div>
     @include('backend.partials.script')
-
 </body>
 
 </html>

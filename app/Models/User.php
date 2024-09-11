@@ -58,7 +58,7 @@ class User extends Authenticatable
     }
     public function captivatingMoments(): HasMany
     {
-        return $this->hasMany(CaptivatingMoment::class);
+        return $this->hasMany(Captative::class, 'user_id', 'id');
     }
 }
 
