@@ -14,6 +14,7 @@ class CaptativeMomentController extends Controller
     public function index()
     {
         $captative = Captative::paginate(10);
+        
         return view('backend.captative.index', compact('captative'));
     }
 
