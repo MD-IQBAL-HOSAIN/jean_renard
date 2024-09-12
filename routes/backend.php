@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\AlbumController;
 use App\Http\Controllers\backend\CaptativeMomentController;
+use App\Http\Controllers\backend\ContactsController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\Backend\PostController;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,15 @@ Route::controller(AlbumController::class)->group(function () {
     Route::put('album/update/{id}', 'update')->name('album.update');
     Route::delete('album/{id}', 'destroy')->name('album.destroy');
 });
+
+// Contacts Routes
+
+Route::controller(ContactsController::class)->group(function () {
+    Route::get('/contact', 'index')->name('contacts.index');
+    Route::get('/contact/{id}', 'show')->name('contacts.show');
+    Route::delete('/contact/{id}', 'destroy')->name('contacts.destroy');
+});
+
 
 
 // backend route end

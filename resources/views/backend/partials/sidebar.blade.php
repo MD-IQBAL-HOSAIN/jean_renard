@@ -44,7 +44,13 @@
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('album.index') }}">
             <i class="fas fa-fw fa-images"></i>
-            <span>Album List</span></a>
+            <span>Albums</span></a>
+    </li>
+    {{-- Contacts start --}}
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('contacts.index') }}">
+            <i class="fas fa-fw fa-phone"></i>
+            <span>Contacts</span></a>
     </li>
 
 
