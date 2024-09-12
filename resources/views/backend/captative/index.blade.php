@@ -11,6 +11,7 @@
         <table class="min-w-full divide-y divide-gray-200 mt-6">
             <thead class="bg-gray-50">
                 <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">SL</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">ID</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">Title</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">Description</th>
@@ -19,23 +20,26 @@
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                @forelse ($captative as $item)
+                @forelse ($captative as $cap)
                     <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item->id }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $item->title }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $item->description }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $loop->iteration }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                           Cap ID: {{ $cap->id }} (User: {{ $cap->user->name}})
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $cap->title }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $cap->description }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            @if ($item->image)
-                                <img src="{{ asset('storage/' . $item->image) }}" alt="Image" class="w-24 h-auto">
+                            @if ($cap->image)
+                                <img src="{{ asset('storage/' . $cap->image) }}" alt="Image" class="w-24 h-auto">
                             @else
                                 No Image
                             @endif
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <a href="{{ route('captivating.edit', ['id' => $item->id]) }}" class="text-yellow-500 hover:text-yellow-600">
+                            <a href="{{ route('captivating.edit', ['id' => $cap->id]) }}" class="text-yellow-500 hover:text-yellow-600">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
-                            <form action="{{ route('captivating.destroy', $item->id) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('captivating.destroy', $cap->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-500 hover:text-red-600">
@@ -46,7 +50,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="text-center px-6 py-4 text-gray-900">No captatives found.</td>
+                        <td colspan="5" class="text-center px-6 py-4 text-gray-900">No captative Moment found.</td>
                     </tr>
                 @endforelse
             </tbody>

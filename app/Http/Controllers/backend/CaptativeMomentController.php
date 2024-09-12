@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\backend;
+
 use App\Models\Captative;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +13,9 @@ class CaptativeMomentController extends Controller
 {
     public function index()
     {
+        // $users = User::all();
         $captative = Captative::all();
+        // dd($captative);
         return view('backend.captative.index', compact('captative'));
     }
 
@@ -21,33 +24,33 @@ class CaptativeMomentController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('backend.captative.create',compact('users'));
+        return view('backend.captative.create', compact('users'));
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'required|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,avif|max:10240',
-    ]);
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,avif|max:10240',
+        ]);
 
-    $captative = new Captative();
-    $captative->title = $request->input('title');
-    $captative->description = $request->input('description');
+        $captative = new Captative();
+        $captative->title = $request->input('title');
+        $captative->description = $request->input('description');
 
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('captative', 'public');
-        $captative->image = $imagePath;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('captative', 'public');
+            $captative->image = $imagePath;
+        }
+
+        // Ensure that user_id is assigned
+        $captative->user_id = Auth::id(); // Assuming user is logged in
+
+        $captative->save();
+
+        return redirect()->route('captivating.index')->with('success', 'Captative created successfully.');
     }
-
-    // Ensure that user_id is assigned
-    $captative->user_id = Auth::id(); // Assuming user is logged in
-
-    $captative->save();
-
-    return redirect()->route('captivating.index')->with('success', 'Captative created successfully.');
-}
 
 
     public function edit(string $id)
@@ -93,4 +96,3 @@ class CaptativeMomentController extends Controller
         return redirect()->route('captivating.index')->with('success', 'Captative deleted successfully.');
     }
 }
-
