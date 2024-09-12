@@ -68,7 +68,7 @@ class PostController extends Controller
             return redirect()->back()->with('error', 'Something went wrong!');
         }
     }
-   
+
 
     /**
      * Display the specified resource.

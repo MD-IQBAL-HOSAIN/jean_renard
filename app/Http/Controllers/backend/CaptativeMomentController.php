@@ -13,8 +13,7 @@ class CaptativeMomentController extends Controller
 {
     public function index()
     {
-        // $users = User::all();
-        $captative = Captative::all();
+        $captative = Captative::paginate(10);
         // dd($captative);
         return view('backend.captative.index', compact('captative'));
     }
