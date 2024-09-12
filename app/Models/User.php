@@ -11,12 +11,6 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -24,21 +18,11 @@ class User extends Authenticatable
         'role',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -47,18 +31,21 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Get all of the posts for the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+    // Relation with posts table
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
+
+    // Relation with captivatingMoments table
     public function captivatingMoments(): HasMany
     {
         return $this->hasMany(Captative::class);
     }
-}
 
+    // Relation with albums table
+    public function albums(): HasMany
+    {
+        return $this->hasMany(Album::class);
+    }
+}

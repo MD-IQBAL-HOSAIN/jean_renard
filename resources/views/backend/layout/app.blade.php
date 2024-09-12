@@ -20,9 +20,10 @@
     <div id="wrapper">
         @include('backend.partials.sidebar')
 
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
+            @include('backend.partials.flash-message')
             @yield('main')
             @include('backend.partials.footer')
         </div>
