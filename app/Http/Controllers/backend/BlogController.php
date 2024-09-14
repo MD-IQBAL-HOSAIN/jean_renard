@@ -6,6 +6,8 @@ use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -14,8 +16,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::with('User')->paginate(10);
-        return view('backend.blog.index', compact('blogs'));
+        $Blogs = Blog::with('User')->paginate(5);
+        return view('backend.blog.index', compact('Blogs'));
     }
 
     /**
@@ -23,31 +25,41 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        return view('backend.blog.create', compact('users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Store Blog
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg,bmp|max:10240',
+        ]);
+
+        $blog = new Blog();
+        $blog->title = $request->title;
+        $blog->description = $request->description;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('Blog', 'public');
+            $blog->image = $imagePath;
+        }
+        // Ensure that user_id is assigned
+        $blog->user_id = Auth::id();
+
+        $blog->save();
+
+        return redirect()->route('blog.index')->with('success', 'Blog created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+        $users = User::all();
+        return view('backend.blog.edit', compact('blog', 'users'));
     }
 
     /**
@@ -55,14 +67,44 @@ class BlogController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validate the incoming request data
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg,bmp|max:10240',
+        ]);
+
+        // Find the existing blog by ID
+        $blog = Blog::findOrFail($id);
+
+        // Update blog attributes
+        $blog->title = $request->title;
+        $blog->description = $request->description;
+
+        // Handle image upload if a new image is provided
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists
+            if ($blog->image) {
+                Storage::disk('public')->delete('Blog/' . $blog->image);
+            }
+
+            // Store the new image
+            $imagePath = $request->file('image')->store('Blog', 'public');
+            $blog->image = basename($imagePath);
+        }
+
+        // Save the updated blog record
+        $blog->save();
+
+        // Redirect with a success message
+        return redirect()->route('blog.index')->with('success', 'Blog updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Delete album
     public function destroy(string $id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+        $blog->delete();
+        return redirect()->route('blog.index')->with('success', 'Blog deleted successfully.');
     }
 }

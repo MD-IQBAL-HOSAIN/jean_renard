@@ -17,9 +17,10 @@
             transition: border-color 0.15s linear;
         }
     </style>
+@endpush
 
 @section('main')
-<div class="container p-3 border border-black"  style="width: 50vw; border-radius: 10px">
+    <div class="container p-3 border border-black" style="width: 50vw; border-radius: 10px">
         <h1 class="text-center text-3xl font-bold mb-6">Add Album Page </h1>
         <hr class="mb-6">
         <form action="{{ route('album.store') }}" method="POST" enctype="multipart/form-data">
@@ -38,8 +39,7 @@
 
             <div class="mb-4">
                 <label for="release_date" class="block text-sm font-medium text-gray-700">Release Date</label>
-                <input type="date" id="release_date" name="release_date"
-                    value="{{ old('release_date') }}"
+                <input type="date" id="release_date" name="release_date" value="{{ old('release_date') }}"
                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     required>
                 @error('release_date')

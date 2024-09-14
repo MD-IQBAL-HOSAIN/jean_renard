@@ -10,7 +10,8 @@
                 <div class="contact-us-content">
                     <h3>Contact Us</h3>
                     <div class="contact-us-form">
-                        <form action="index.html">
+                        <form action="{{ route('contacts2.store') }}" method="POST">
+                            @csrf
                             <div class="contact-us-name-email d-flex">
                                 <div class="form-group">
                                     <label for="name">NAME*</label>
@@ -31,7 +32,7 @@
                                 <div class="form-group">
                                     <div class="contact-us-select">
                                         <label for="country">COUNTRY*</label>
-                                    <select name="region" id="region" required>
+                                    <select name="country" id="country" required>
                                         <option disabled selected value="">Choose your country</option>
                                         <option value="AF">Afghanistan</option>
                                         <option value="AL">Albania</option>
@@ -284,7 +285,7 @@
                             <div class="contact-us-message">
                                 <div class="form-group d-flex flex-column">
                                     <label for="message">YOUR MESSAGE*</label>
-                                    <textarea placeholder="Message" required></textarea>
+                                    <textarea name="message" placeholder="Message" required></textarea>
                                 </div>
                             </div>
                             <div class="contact-us-terms">

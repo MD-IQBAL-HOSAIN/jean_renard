@@ -73,7 +73,7 @@
                 </li>
                 <li class="list-menu"><a href="{{ route('media') }}">MEDIA</a></li>
                 <li class="list-menu"><a href="{{ route('shop') }}">SHOP</a></li>
-                <li class="list-menu"><a href="{{ route('contacts') }}">CONTACT/HELP</a></li>
+                <li class="list-menu"><a href="{{ route('contacts1') }}">CONTACT/HELP</a></li>
             </ul>
         </div>
     </nav>
@@ -89,7 +89,7 @@
             </li>
             <li class="list-menu"><a href="{{ route('media') }}">MEDIA</a></li>
             <li class="list-menu"><a href="{{ route('shop') }}">SHOP</a></li>
-            <li class="list-menu"><a href="{{ route('contacts') }}">CONTACT/HELP</a></li>
+            <li class="list-menu"><a href="{{ route('contacts1') }}">CONTACT/HELP</a></li>
         </ul>
         <a href="{{ route('login') }}">
             <button class="login-btn login-btn-sm">Log In / Sign Up</button>

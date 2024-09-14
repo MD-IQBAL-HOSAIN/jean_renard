@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\AlbumController;
+use App\Http\Controllers\backend\BlogController;
 use App\Http\Controllers\backend\CaptativeMomentController;
 use App\Http\Controllers\backend\ContactsController;
 use App\Http\Controllers\backend\DashboardController;
@@ -42,13 +43,13 @@ Route::controller(ContactsController::class)->group(function () {
 });
 
 // Blog Routes
-Route::controller(AlbumController::class)->group(function () {
+Route::controller(BlogController::class)->group(function () {
     Route::get('blog', 'index')->name('blog.index');
-    // Route::get('blog/create', 'create')->name('blog.create');
-    // Route::post('blog/store', 'store')->name('blog.store');
-    // Route::get('blog/edit/{id}', 'edit')->name('blog.edit');
-    // Route::put('blog/update/{id}', 'update')->name('blog.update');
-    // Route::delete('blog/{id}', 'destroy')->name('blog.destroy');
+    Route::get('blog/create', 'create')->name('blog.create');
+    Route::post('blog/store', 'store')->name('blog.store');
+    Route::get('blog/edit/{id}', 'edit')->name('blog.edit');
+    Route::put('blog/update/{id}', 'update')->name('blog.update');
+    Route::delete('blog/{id}', 'destroy')->name('blog.destroy');
 });
 
 // backend route end
