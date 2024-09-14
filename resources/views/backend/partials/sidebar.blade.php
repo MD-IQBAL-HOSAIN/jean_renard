@@ -52,6 +52,12 @@
             <i class="fas fa-fw fa-phone"></i>
             <span>Contacts</span></a>
     </li>
+    {{-- Blog start --}}
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('blog.index') }}">
+            <i class="fas fa-fw fa-blog"></i>
+            <span>Blog</span></a>
+    </li>
 
 
 

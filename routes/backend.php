@@ -41,6 +41,14 @@ Route::controller(ContactsController::class)->group(function () {
     Route::delete('/contact/{id}', 'destroy')->name('contacts.destroy');
 });
 
-
+// Blog Routes
+Route::controller(AlbumController::class)->group(function () {
+    Route::get('blog', 'index')->name('blog.index');
+    // Route::get('blog/create', 'create')->name('blog.create');
+    // Route::post('blog/store', 'store')->name('blog.store');
+    // Route::get('blog/edit/{id}', 'edit')->name('blog.edit');
+    // Route::put('blog/update/{id}', 'update')->name('blog.update');
+    // Route::delete('blog/{id}', 'destroy')->name('blog.destroy');
+});
 
 // backend route end
