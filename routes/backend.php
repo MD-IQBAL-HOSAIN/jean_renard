@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 
 // backend route start
 Route::middleware(['auth', 'admin'])->group(function () {
+    //Admin Dashboard
     Route::get('/adminDashboard', [DashboardController::class, 'index'])->name('adminDashboard');
+    //post routes
     Route::resource('/posts', PostController::class)->names('posts');
 });
 // Captative Routes

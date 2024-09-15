@@ -14,7 +14,7 @@ class CaptativeMomentController extends Controller
     public function index()
     {
         $captative = Captative::paginate(10);
-        
+
         return view('backend.captative.index', compact('captative'));
     }
 
@@ -28,27 +28,37 @@ class CaptativeMomentController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,avif|max:10240',
-        ]);
+        try {
+            $request->validate([
+                'title' => 'required|string|max:255',
+                'description' => 'required|string',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,avif|max:10240',
+            ]);
 
-        $captative = new Captative();
-        $captative->title = $request->input('title');
-        $captative->description = $request->input('description');
+            $captative = new Captative();
+            $captative->title = $request->input('title');
+            $captative->description = $request->input('description');
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('captative', 'public');
-            $captative->image = $imagePath;
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('captative', 'public');
+                $captative->image = $imagePath;
+            }
+
+            // Ensure that user_id is assigned
+            $captative->user_id = Auth::id(); // Assuming user is logged in
+
+            $captative->save();
+
+            return redirect()->route('captivating.index')->with('swalMsg', [
+                'type' => 'success',
+                'message' => 'Cavtivate Moment Create Successfully.'
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('swalMsg', [
+                'type' => 'error',
+                'message' => 'Something went wrong!'
+            ]);
         }
-
-        // Ensure that user_id is assigned
-        $captative->user_id = Auth::id(); // Assuming user is logged in
-
-        $captative->save();
-
-        return redirect()->route('captivating.index')->with('success', 'Captative created successfully.');
     }
 
 
@@ -64,24 +74,33 @@ class CaptativeMomentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,avif|max:10240',
-        ]);
+        try {
+            $request->validate([
+                'title' => 'required|string|max:255',
+                'description' => 'required|string',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,avif|max:10240',
+            ]);
 
-        $captative = Captative::findOrFail($id);
-        $captative->title = $request->input('title');
-        $captative->description = $request->input('description');
+            $captative = Captative::findOrFail($id);
+            $captative->title = $request->input('title');
+            $captative->description = $request->input('description');
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('captative', 'public');
-            $captative->image = $imagePath;
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('captative', 'public');
+                $captative->image = $imagePath;
+            }
+
+            $captative->save();
+            return redirect()->route('captivating.index')->with('swalMsg', [
+                'type' => 'success',
+                'message' => 'Cavtivate Moment Updated Successfully.'
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('swalMsg', [
+                'type' => 'error',
+                'message' => 'Something went wrong!'
+            ]);
         }
-
-        $captative->save();
-
-        return redirect()->route('captivating.index')->with('success', 'Captative updated successfully.');
     }
 
     /**
@@ -89,9 +108,19 @@ class CaptativeMomentController extends Controller
      */
     public function destroy(string $id)
     {
-        $captative = Captative::findOrFail($id);
-        $captative->delete();
+        try {
+            $captative = Captative::findOrFail($id);
+            $captative->delete();
 
-        return redirect()->route('captivating.index')->with('success', 'Captative deleted successfully.');
+            return redirect()->route('captivating.index')->with('swalMsg', [
+                'type' => 'success',
+                'message' => 'Cavtivate Moment Deleted Successfully.'
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('swalMsg', [
+                'type' => 'error',
+                'message' => 'Something went wrong!'
+            ]);
+        }
     }
 }

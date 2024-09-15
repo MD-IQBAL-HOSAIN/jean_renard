@@ -1,5 +1,10 @@
 @extends('backend.layout.app', ['title' => 'Captative Moments'])
 
+
+@push('style')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+@endpush
+
 @section('main')
     <div class="container mx-auto p-6">
         <h1 class="text-center text-3xl font-bold mb-6">Captative Moments List</h1>
@@ -43,13 +48,15 @@
                                 class="text-yellow-500 hover:text-yellow-600">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
-                            <form action="{{ route('captivating.destroy', $cap->id) }}" method="POST"
-                                style="display:inline;">
+                            <form id="delete-form-{{ $cap->id }}" action="{{ route('captivating.destroy', $cap->id) }}"
+                                method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:text-red-600">
+                                <button type="button" class="text-red-500 hover:text-red-600"
+                                    onclick="confirmDelete({{ $cap->id }})">
                                     <i class="fas fa-trash"></i> Delete
                                 </button>
+
                             </form>
                         </td>
                     </tr>
@@ -60,8 +67,48 @@
                 @endforelse
             </tbody>
         </table>
+       
         <div class="mt-2">
             {{ $captative->links() }}
         </div>
     </div>
 @endsection
+
+@push('script')
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('swalMsg'))
+                const swalMsg = @json(session('swalMsg'));
+
+                Swal.fire({
+                    title: swalMsg.type === 'success' ? 'Success!' : 'Error!',
+                    text: swalMsg.message,
+                    icon: swalMsg.type,
+                    showCancelButton: false,
+                    confirmButtonText: 'Ok',
+                    // cancelButtonText: 'Cancel',
+                    // cancelButtonColor: '#d33'
+                });
+            @endif
+        });
+
+        function confirmDelete(postId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel!',
+                cancelButtonColor: '#d33'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Find and submit the form with the specific ID
+                    document.getElementById('delete-form-' + postId).submit();
+                }
+            });
+        }
+    </script>
+@endpush

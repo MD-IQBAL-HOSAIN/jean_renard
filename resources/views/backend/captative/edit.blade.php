@@ -20,47 +20,57 @@
 @endpush
 
 @section('main')
-<div class="container mt-3 card" style="width: 50vw;">
-    <div class="card-header">
-        <h4 class="card-title text-center">Edit Captative Moment</h4>
-    </div>
-    <div class="card-body">
-        <form action="{{ route('captivating.update', $captative->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $captative->title) }}" required>
-                @error('title')
-                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="5" required>{{ old('description', $captative->description) }}</textarea>
-                @error('description')
-                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="user_id">User ID</label>
-                <select class="form-control" id="user_id" name="user_id">
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}" {{ $user->id == $captative->user_id ? 'selected' : '' }}>{{ $user->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="image">Image</label>
-                <input type="file" class="dropify form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
+    <div class="container mt-3 card" style="width: 50vw;">
+        <div class="card-header">
+            <h4 class="card-title text-center">Edit Captative Moment</h4>
+        </div>
+        <div class="card-body">
+            <form action="{{ route('captivating.update', $captative->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
+                        name="title" value="{{ old('title', $captative->title) }}" required>
+                    @error('title')
+                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+                        rows="5" required>{{ old('description', $captative->description) }}</textarea>
+                    @error('description')
+                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="user_id">User ID</label>
+                    <select class="form-control" id="user_id" name="user_id">
+                        @foreach ($users as $user)
+                            <option value="{{ $user->id }}"
+                                {{ old('user_id', $captative->user_id) == $user->id ? 'selected' : '' }}>
+                                {{ $user->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="dropify form-control @error('image') is-invalid @enderror" id="image"
+                        name="image" accept="image/*"
+                        data-default-file="{{ $captative->image ? asset('storage/' . $captative->image) : '' }}" />
 
-            </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-success">Update</button>
-            </div>
-        </form>
+                </div>
+                <div class="flex items-center justify-between space-x-2 mt-4">
+                    <a href="{{ url()->previous() }}"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </a>
+                    <button type="submit" class="btn btn-success">Update</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 @endsection
 @push('script')
     <!-- Dropify JS -->

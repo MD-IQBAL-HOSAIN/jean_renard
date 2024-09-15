@@ -2,7 +2,7 @@
 
 @push('style')
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         .dropify-wrapper .dropify-preview .dropify-render img {
             top: 50%;
@@ -65,13 +65,16 @@
         </form>
     </div>
 @endsection
+
 @push('script')
     <!-- Dropify JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('.dropify').dropify();
         });
     </script>
+
 @endpush
