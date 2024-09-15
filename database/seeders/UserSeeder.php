@@ -4,9 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -15,21 +12,13 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-      /*   $users = array_map(function ($role) {
-            return [
-                'name' => Str::random(10),
-                'email' => Str::random(10) . '@gmail.com',
-                'password' => Hash::make('11111111'),
-                'email_verified_at' => now(),
-                'role' => $role,
-                'remember_token' => Str::random(10),
-            ];
-        }, array_merge(
-            array_fill(0, 5, 'user'),
-            array_fill(0, 5, 'admin')
-        ));
-        DB::table('users')->insert($users); */
+        // Add custom admin user
+        User::factory()->customAdmin()->create();
 
-        user::class::factory()->count(10)->create();
+        // Add custom regular user
+        User::factory()->customUser()->create();
+        
+        // Add 10 random users
+        User::factory()->count(10)->create();
     }
 }

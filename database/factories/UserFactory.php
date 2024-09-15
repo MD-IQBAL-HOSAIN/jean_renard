@@ -7,23 +7,21 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+
+namespace Database\Factories;
+
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
 class UserFactory extends Factory
-{
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
+{    
     protected $model = User::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
@@ -32,22 +30,33 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => Hash::make('11111111'),
             'remember_token' => Str::random(10),
-            'role' => $this->faker->randomElement(array_merge(
-                array_fill(0, 5, 'user'),
-                array_fill(0, 5, 'admin')
-            )),
+            'role' => $this->faker->randomElement(['user', 'admin']), 
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
+    // Custom admin user factory state
+    public function customAdmin(): static
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
+        return $this->state([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('11111111'),
+            'role' => 'admin',
+            'remember_token' => Str::random(10),
+        ]);
+    }
+
+    // Custom regular user factory state
+    public function customUser(): static
+    {
+        return $this->state([
+            'name' => 'User',
+            'email' => 'user@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('11111111'), 
+            'role' => 'user',
+            'remember_token' => Str::random(10),
         ]);
     }
 }
-
-
