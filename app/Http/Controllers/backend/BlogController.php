@@ -51,7 +51,10 @@ class BlogController extends Controller
 
         $blog->save();
 
-        return redirect()->route('blog.index')->with('success', 'Blog created successfully.');
+        return redirect()->route('blog.index')->with('swalMsg', [
+            'type' => 'success',
+            'message' => 'Blog created successfully.'
+        ]);
     }
 
 
@@ -97,14 +100,22 @@ class BlogController extends Controller
         $blog->save();
 
         // Redirect with a success message
-        return redirect()->route('blog.index')->with('success', 'Blog updated successfully.');
+        return redirect()->route('blog.index')->with('swalMsg', [
+            'type' => 'success',
+            'message' => 'Blog updated successfully.'
+        ]);
     }
 
-    // Delete album
+    // Delete Blog
     public function destroy(string $id)
     {
         $blog = Blog::findOrFail($id);
         $blog->delete();
-        return redirect()->route('blog.index')->with('success', 'Blog deleted successfully.');
+
+        // Redirect with a success message
+        return redirect()->route('blog.index')->with('swalMsg', [
+            'type' => 'success',
+            'message' => 'Blog deleted successfully.'
+        ]);
     }
 }

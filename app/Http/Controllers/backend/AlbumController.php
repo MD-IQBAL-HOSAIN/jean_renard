@@ -87,6 +87,8 @@ public function edit($id)
     $users = User::all();
     return view('backend.album.edit', compact('album', 'users'));
 }
+
+// Delete album
 public function destroy($id)
 {
     $album = Album::findOrFail($id);
