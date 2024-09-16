@@ -17,6 +17,26 @@
         <a class="nav-link" href="{{ route('adminDashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
+
+
+        <!-- CMS -->
+        <div class="sidebar-heading">
+            CMS
+        </div>
+
+    <li class="nav-item active">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagess"
+            aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-calendar-plus"></i>
+            <span>Upcomming Album</span>
+        </a>
+        <div id="collapsePagess" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="">
+                <ul>
+                    <a class="collapse-item text-white ml-8" style="text-decoration: none; " href="{{ route('upcomming.album.index') }}">Upcomming Album</a>
+                </ul>
+            </div>
+        </div>
     </li>
 
     <!-- Divider -->
@@ -69,34 +89,28 @@
         Addons
     </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Settings -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
             aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Pages</span>
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Settings</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('login') }}">Login</a>
-                <a class="collapse-item" href="{{ route('register') }}">Register</a>
-                <a class="collapse-item" href="{{ route('password.request') }}">Forgot Password</a>
+        <div id="collapsePages" style="background-color: bisque; border-radius: 10px;" class="collapse"
+            aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('logins') }}">Login</a>
+                <a class="collapse-item" href="{{ route('registers') }}">Register</a>
+                <a class="collapse-item" href="{{ route('forgetpass') }}">Forgot Password</a>
+                <a class="collapse-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+
             </div>
         </div>
     </li>
-
-    {{-- log out --}}
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('logout') }}"
-            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Log Out</span>
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
-    </li>
-
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

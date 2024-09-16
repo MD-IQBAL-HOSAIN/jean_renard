@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\backend\AlbumController;
-use App\Http\Controllers\backend\BlogController;
-use App\Http\Controllers\backend\CaptativeMomentController;
-use App\Http\Controllers\backend\ContactsController;
-use App\Http\Controllers\backend\DashboardController;
-use App\Http\Controllers\Backend\PostController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\backend\BlogController;
+use App\Http\Controllers\Backend\PostController;
+use App\Http\Controllers\backend\AlbumController;
+use App\Http\Controllers\backend\ContactsController;
+use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\backend\UpcommingAlbumController;
+use App\Http\Controllers\backend\CaptativeMomentController;
 
 
 // backend route start
@@ -52,6 +53,14 @@ Route::controller(BlogController::class)->group(function () {
     Route::get('blog/edit/{id}', 'edit')->name('blog.edit');
     Route::put('blog/update/{id}', 'update')->name('blog.update');
     Route::delete('blog/{id}', 'destroy')->name('blog.destroy');
+});
+
+// Route for Upcomming Album Slider Image Controller for Biography page composition section
+Route::controller(UpcommingAlbumController::class)->group(function () {
+    Route::get('upcomming/album', 'index')->name('upcomming.album.index');
+    Route::get('upcomming/album/create', 'create')->name('upcomming.album.create');
+    Route::post('upcomming/album/store', 'store')->name('upcomming.album.store');
+    Route::delete('upcomming/album/delete/{id}', 'destroy')->name('upcomming.album.delete');
 });
 
 // backend route end
