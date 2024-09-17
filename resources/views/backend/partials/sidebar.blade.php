@@ -1,3 +1,40 @@
+@push('style')
+    <style>
+        .nav-item a {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+            /* Dark text color */
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item a:hover {
+            background-color: #f8f9fa;
+            /* Light background on hover */
+            color: #007bff;
+            /* Blue text on hover */
+        }
+
+        .collapse-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+        }
+
+        .collapse-item i {
+            color: #007bff;
+            /* Icon color */
+        }
+
+        /* Spacing for list items inside collapse */
+        .collapse-inner ul li {
+            margin-bottom: 10px;
+        }
+    </style>
+@endpush
+
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -19,25 +56,33 @@
             <span>Dashboard</span></a>
 
 
-        <!-- CMS -->
-        <div class="sidebar-heading">
+        <!-- CMS Section -->
+        <div class="sidebar-heading text-uppercase text-muted">
             CMS
         </div>
 
-    <li class="nav-item active">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagess"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-calendar-plus"></i>
-            <span>Upcomming Album</span>
+    <li class="nav-item">
+        <a class="nav-link collapsed d-flex align-items-center" href="#" data-bs-toggle="collapse"
+            data-bs-target="#collapseCms" aria-expanded="false" aria-controls="collapseCms">
+            <i class="fas fa-fw fa-calendar-plus me-2"></i> <!-- Calendar icon for Upcoming Album -->
+            <span>Upcoming Album</span>
         </a>
-        <div id="collapsePagess" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="">
-                <ul>
-                    <a class="collapse-item text-white ml-8" style="text-decoration: none; " href="{{ route('upcomming.album.index') }}">Upcomming Album</a>
+
+        <!-- Collapse Content -->
+        <div id="collapseCms" class="collapse" aria-labelledby="headingCms" data-bs-parent="#accordionSidebar">
+            <div class="collapse-inner">
+                <ul class="list-unstyled ms-4">
+                    <li>
+                        <a class="collapse-item text-dark d-flex align-items-center"
+                            href="{{ route('upcomming.album.index') }}">
+                            <i class="fas fa-fw fa-calendar-day me-2"></i>Upcoming Album
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -79,6 +124,57 @@
             <span>Blog</span></a>
     </li>
 
+    <!-- Sidebar Section for Settings -->
+    <div class="sidebar-heading text-uppercase text-muted">
+        Settings
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed d-flex align-items-center" href="#" data-bs-toggle="collapse"
+            data-bs-target="#collapseSettings" aria-expanded="false" aria-controls="collapseSettings">
+            <i class="fas fa-fw fa-cogs me-2"></i> <!-- Gear icon for Settings -->
+            <span>Settings</span>
+        </a>
+
+        <!-- Collapse Content -->
+        <div id="collapseSettings" class="collapse" aria-labelledby="headingSettings" data-parent="#accordionSidebar">
+            <div class="collapse-inner">
+                <ul class="list-unstyled ms-4">
+                    <li>
+                        <a class="collapse-item text-dark" href="{{ route('system.index') }}">
+                            <i class="fas fa-fw fa-sliders-h me-2"></i>System Settings
+                        </a>
+                    </li>
+                    <li>
+                        <a class="collapse-item text-dark" href="{{ route('logins') }}">
+                            <i class="fas fa-fw fa-sign-in-alt me-2"></i>Login
+                        </a>
+                    </li>
+                    <li>
+                        <a class="collapse-item text-dark" href="{{ route('registers') }}">
+                            <i class="fas fa-fw fa-user-plus me-2"></i>Register
+                        </a>
+                    </li>
+                    <li>
+                        <a class="collapse-item text-dark" href="{{ route('forgetpass') }}">
+                            <i class="fas fa-fw fa-key me-2"></i>Forgot Password
+                        </a>
+                    </li>
+                    <li>
+                        <a class="collapse-item text-dark" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-fw fa-sign-out-alt me-2"></i>Log Out
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </li>
+
+
 
 
     <!-- Divider -->
@@ -88,30 +184,6 @@
     <div class="sidebar-heading">
         Addons
     </div>
-
-    <!-- Settings -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Settings</span>
-        </a>
-        <div id="collapsePages" style="background-color: bisque; border-radius: 10px;" class="collapse"
-            aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('logins') }}">Login</a>
-                <a class="collapse-item" href="{{ route('registers') }}">Register</a>
-                <a class="collapse-item" href="{{ route('forgetpass') }}">Forgot Password</a>
-                <a class="collapse-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-
-            </div>
-        </div>
-    </li>
-
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
@@ -120,4 +192,5 @@
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 </ul>
+
 <!-- End of Sidebar -->

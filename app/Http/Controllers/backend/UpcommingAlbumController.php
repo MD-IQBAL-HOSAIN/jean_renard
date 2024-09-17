@@ -43,40 +43,7 @@ class UpcommingAlbumController extends Controller
     public function create()
     {
         return view('backend.upcommingAlbum.create');
-    }
-
-   /*  public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'title' => 'nullable|string',
-            'sub_title' => 'nullable|string',
-            'location' => 'nullable|string',
-            'performance_date' => 'nullable|date',
-            'image_url' => 'nullable|image|mimes:jpeg,jpg,png,svg,webp|max:2048', // Validation for the image
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        // Handle image upload
-        $image_url = null;
-        if ($request->hasFile('image_url')) {
-            // Store the uploaded image in the 'public/upcommingAlbum' directory
-            $image_url = $request->file('image_url')->store('upcommingAlbum', 'public');
-        }
-
-        // Save data into the database
-        UpcommingAlbum::create([
-            'title' => $request->input('title'),
-            'sub_title' => $request->input('sub_title'),
-            'location' => $request->input('location'),
-            'performance_date' => $request->input('performance_date'),
-            'image_url' => $image_url, // Saving the image path in the database
-        ]);
-
-        return redirect()->route('upcomming.album.index')->with('success', 'Data Insert successfully !');
-    } */
+    }                                                                                                                    
 
     public function store(Request $request)
     {

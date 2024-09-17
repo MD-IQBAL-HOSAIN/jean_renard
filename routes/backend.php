@@ -9,6 +9,7 @@ use App\Http\Controllers\backend\ContactsController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\UpcommingAlbumController;
 use App\Http\Controllers\backend\CaptativeMomentController;
+use App\Http\Controllers\backend\CMS\SystemSettingsController;
 
 
 // backend route start
@@ -63,5 +64,15 @@ Route::controller(UpcommingAlbumController::class)->group(function () {
     Route::delete('/upcomming-album/{id}','destroy')->name('upcomming.album.delete');
 
 });
+
+Route::controller(SystemSettingsController::class)->group(function () {
+    Route::get('/system-settings', 'index')->name('system.index');
+    Route::put('system-settings/update/{id}', 'update')->name('system.update');
+    // Route::get('system-settings/create', 'create')->name('system.create');
+    // Route::post('system-settings/store', 'store')->name('system.store');
+    // Route::get('system-settings/edit/{id}', 'edit')->name('system.edit');
+    // Route::delete('system-settings/{id}', 'destroy')->name('system.delete');
+});
+
 
 // backend route end
