@@ -72,11 +72,9 @@
 
                                 <div class="form-group row mb-3">
                                     <div class="col">
-                                        <label class="form-lable">Image</label>
-                                        <input type="file" class="dropify form-control" id="image" name="image"
-                                            @error('image_url') is-invalid @enderror
-                                            data-default-file="{{ asset('backend/images/placeholder/image_placeholder.png') }}"
-                                            name="image_url">
+                                        <label class="form-label">Image</label>
+                                        <input type="file" class="dropify form-control" id="image" name="image_url"
+                                            data-default-file="{{ asset('backend/images/placeholder/image_placeholder.png') }}">
 
                                         @error('image_url')
                                             <span class="invalid-feedback" role="alert">
@@ -85,7 +83,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
                                 {{-- <div class="form-group mb-3">
                                     <label class="form-lable">Performance Date:</label>
                                     <input type="date" class="form-control @error('performance_date') is-invalid @enderror" id="performance_date" name="performance_date" value="{{old('performance_date')}}">

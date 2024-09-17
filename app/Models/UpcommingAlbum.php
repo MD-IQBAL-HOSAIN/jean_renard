@@ -9,4 +9,11 @@ class UpcommingAlbum extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+
+    //I used accesors to get the image url in the blade file
+    public function getImageUrlAttribute($value)
+    {
+        return 'storage/' . $value;
+    }
 }

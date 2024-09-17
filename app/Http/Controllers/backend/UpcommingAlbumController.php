@@ -11,103 +11,121 @@ use Illuminate\Support\Facades\Validator;
 
 class UpcommingAlbumController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
-        if($request->ajax()){
-            $data = UpcommingAlbum::get();
-            // dd($data);
+        if ($request->ajax()) {
+            $data = UpcommingAlbum::select('*');
 
             return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('performance_date',function($data){
-                return Carbon::parse($data->performance_date)->format('d F Y');
-            })
-
-            ->addColumn('action', function ($data) {
-                return '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-
-                              <a href="' . route('upcomming.album.delete', $data->id) . '" onclick="showDeleteConfirm(' . $data->id . ')" type="button" class="btn btn-danger text-white" title="Delete">
-                              <i class="bi bi-trash"></i>
-                            </a>
-
+                ->addIndexColumn()
+                ->addColumn('location', function ($data) {
+                    return $data->location;
+                })
+                ->addColumn('performance_date', function ($data) {
+                    return Carbon::parse($data->performance_date)->format('d F Y');
+                })
+                ->addColumn('image', function ($data) {
+                    return "<img width='70px' src='" . asset($data->image_url) . "' />";
+                })
+                ->addColumn('action', function ($data) {
+                    return '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <a href="#" onclick="showDeleteConfirm(' . $data->id . ')" type="button" class="btn btn-danger text-white" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </div>';
-            })
-            ->addColumn('image', function ($data) {
-                return "<img width='70px' src='" . asset('storage/' .$data->image_url) . "' ></img>";
-            })
-            ->rawColumns(['performance_date','action','image'])
-            ->make(true);
-
+                })
+                ->rawColumns(['location', 'image', 'performance_date', 'action'])
+                ->make(true);
         }
         return view('backend.upcommingAlbum.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-       return view('backend.upcommingAlbum.create');
+        return view('backend.upcommingAlbum.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+   /*  public function store(Request $request)
     {
-        // dd($request->all());
-        // Validate the incoming request data
         $validator = Validator::make($request->all(), [
             'title' => 'nullable|string',
             'sub_title' => 'nullable|string',
             'location' => 'nullable|string',
             'performance_date' => 'nullable|date',
+            'image_url' => 'nullable|image|mimes:jpeg,jpg,png,svg,webp|max:2048', // Validation for the image
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Handle image upload
+        $image_url = null;
+        if ($request->hasFile('image_url')) {
+            // Store the uploaded image in the 'public/upcommingAlbum' directory
+            $image_url = $request->file('image_url')->store('upcommingAlbum', 'public');
+        }
+
+        // Save data into the database
+        UpcommingAlbum::create([
+            'title' => $request->input('title'),
+            'sub_title' => $request->input('sub_title'),
+            'location' => $request->input('location'),
+            'performance_date' => $request->input('performance_date'),
+            'image_url' => $image_url, // Saving the image path in the database
+        ]);
+
+        return redirect()->route('upcomming.album.index')->with('success', 'Data Insert successfully !');
+    } */
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'nullable|string',
+            'location' => 'nullable|string',
+            'performance_date' => 'nullable|date',
             'image_url' => 'nullable|image|mimes:jpeg,jpg,png,svg,webp|max:2048',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         // Handle image upload
         $image_url = null;
 
         if ($request->hasFile('image_url')) {
-            // $image = $request->file('image_url');
-            $image_url = $request->file('image_url')->store('upcommingAlbum', 'public');
-            // $image_url = uploadImage($image, 'images/cms/upcomming-album');
-        } else {
-            $image_url = null;
+            $image = $request->file('image_url');
+            $image_url = $image->store('upcommingAlbum', 'public');
         }
 
-        // Create the gallary image entry
+        // Create the gallery image entry
         $data = UpcommingAlbum::create([
             'title' => $request->title,
-            'sub_title' => $request->sub_title,
             'location' => $request->location,
             'performance_date' => $request->performance_date,
             'image_url' => $image_url,
         ]);
 
         if ($data) {
-            return  redirect()->action([self::class, 'index'])->with('success', 'Slider image created successfully.');
+            return redirect()->route('upcomming.album.index')->with('success', 'Slider image created successfully.');
         } else {
-            return redirect()->action([self::class, 'create'])->with('error', 'Data update failed!');
+            return redirect()->route('upcomming.album.create')->with('error', 'Data update failed!');
         }
     }
-
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-        $data = UpcommingAlbum::find($id);
+        $album = UpcommingAlbum::find($id);
 
-        if (!$data) {
-            return response()->json(['t-success' => false, 'message' => 'Data not found.']);
+        if (!$album) {
+            return response()->json(['success' => false, 'message' => 'Data not found.']);
         }
-        $data->delete();
-        return response()->json(['t-success' => true, 'message' => 'Deleted successfully.']);
+
+        try {
+            $album->delete();
+            return response()->json(['success' => true, 'message' => 'Album deleted successfully.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'An error occurred while deleting.']);
+        }
     }
 }

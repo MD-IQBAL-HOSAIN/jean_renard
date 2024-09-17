@@ -60,7 +60,8 @@ Route::controller(UpcommingAlbumController::class)->group(function () {
     Route::get('upcomming/album', 'index')->name('upcomming.album.index');
     Route::get('upcomming/album/create', 'create')->name('upcomming.album.create');
     Route::post('upcomming/album/store', 'store')->name('upcomming.album.store');
-    Route::delete('upcomming/album/delete/{id}', 'destroy')->name('upcomming.album.delete');
+    Route::delete('/upcomming-album/{id}','destroy')->name('upcomming.album.delete');
+
 });
 
 // backend route end
