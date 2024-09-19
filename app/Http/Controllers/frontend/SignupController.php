@@ -1,23 +1,10 @@
 <?php
 
-/* namespace App\Http\Controllers\frontend;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-class SignupController extends Controller
-{
-    public function index()
-    {
-        return view('frontend.partials.register');
-    }
-} */
-
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User; // Ensure you include the User model
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
